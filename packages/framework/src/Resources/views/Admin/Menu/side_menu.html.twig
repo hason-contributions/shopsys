@@ -38,6 +38,7 @@
     {%- endif -%}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
         <ul{{ self.attributes(item.childrenAttributes, classes) }}>
+            <div class="side-menu__switcher js-menu-switcher"><i class="svg svg-double-arrow"></i></div>
             {{ block('children') }}
         </ul>
     {% endif %}
@@ -106,9 +107,14 @@
     {%- if icon is not null -%}
         <i class="svg svg-{{ icon }}"></i>
     {%- endif -%}
+    {%- set class = item.level == 1 ? 'side-menu__item__text' : 'side-menu__submenu__item__text' -%}
+    <span{{ self.attributes(item.labelAttributes, [class]) }}>
     {%- if options.allow_safe_labels and item.getExtra('safe_label', false) -%}
         {{ item.label|raw }}
     {%- else -%}
         {{ item.label }}
     {%- endif -%}
+
+        <i class="side-menu__item__arrow side-menu__item__arrow--down"></i>
+    </span>
 {% endblock %}

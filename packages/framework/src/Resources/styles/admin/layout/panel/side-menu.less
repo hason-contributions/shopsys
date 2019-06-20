@@ -1,5 +1,46 @@
+@side-menu-item-border: none;
+@side-menu-item-active-border-width: 4px;
+@side-menu-item-padding: 18px;
+@side-menu-item-icon-size: 16px;
+@side-menu-item-icon-right-gap: 15px;
+@side-menu-menu-border: 1px solid @bg-web;
+
 .side-menu {
     .reset-ul();
+    position: relative;
+    width: @width-panel;
+
+    .menu-collapsed & {
+        border-right: @side-menu-menu-border;
+        width: @width-panel-small;
+
+        transition: width 200ms;
+    }
+
+    &__switcher {
+        position: absolute;
+        top: 0px;
+        right: 0;
+        display: block;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        z-index: 1;
+
+        cursor: pointer;
+        background: @color-blue;
+        color: @color-f;
+        border-bottom-left-radius: 50%;
+
+        .menu-collapsed & {
+            .svg {
+                margin-top: 5px;
+
+                transform: rotate(180deg);
+                transition: transform 200ms;
+            }
+        }
+    }
 
     &__item {
         display: block;
@@ -71,10 +112,33 @@
                 }
             }
         }
+
+        &__text {
+            .menu-collapsed & {
+                display: none;
+            }
+        }
+
+        &__arrow {
+            display: none;
+            width: 20px;
+            float: right;
+
+            &--up {
+                .draw-arrow-top(5px, @color-base, 5px, 8px);
     }
 
     &__submenu {
         .reset-ul();
+
+        .menu-collapsed & {
+            position: absolute;
+            top: 9px;
+            left: calc(~"@{side-menu-item-icon-size} + @{side-menu-item-padding} + @{side-menu-item-icon-right-gap}");
+            width: calc(~"@{width-panel} - (@{side-menu-item-icon-size} + @{side-menu-item-padding} + @{side-menu-item-icon-right-gap})");
+
+            border-left: @side-menu-menu-border;
+        }
 
         .side-menu__item--active > & {
             display: block !important;
@@ -102,6 +166,10 @@
                 font-size: 14px;
                 text-decoration: none;
 
+                .menu-collapsed & {
+                    padding-left: @side-menu-item-padding;
+                }
+
                 .side-menu__item--active & {
                     padding-left: 33px;
 
@@ -115,7 +183,21 @@
                 .side-menu__submenu__item--active > & {
                     color: @color-link;
                     font-weight: bold;
+
+                    .menu-collapsed & {
+                        padding: calc(~"@{side-menu-item-padding} - @{side-menu-item-active-border-width}");
+
+                        background-color: @color-grey-light;
+                        border-left: @side-menu-item-active-border-width solid @color-blue;
+                        color: @color-link;
+                        font-weight: 500;
+
+                        .svg {
+                            color: @color-link;
                 }
+                    }
+                }
+
 
                 .side-menu__submenu__item--superadmin & {
                     color: @color-red;
