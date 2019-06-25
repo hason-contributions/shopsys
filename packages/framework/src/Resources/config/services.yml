@@ -487,6 +487,7 @@ services:
         tags:
             # must be run after all recalculations
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: -30}
+        arguments: ["%kernel.environment%"]
 
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler: ~
 

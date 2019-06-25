@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Product;
 
+use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
@@ -18,6 +19,7 @@ use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\FrameworkBundle\Model\Product\Pricing\ProductSellingPrice;
+use Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler;
 
 class ProductFacade
 {
@@ -132,6 +134,11 @@ class ProductFacade
     protected $productPriceCalculation;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler
+     */
+    protected $productSearchExportScheduler;
+
+    /**
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductRepository $productRepository
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFacade $productVisibilityFacade
@@ -154,6 +161,7 @@ class ProductFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ProductParameterValueFactoryInterface $productParameterValueFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\ProductVisibilityFactoryInterface $productVisibilityFactory
      * @param \Shopsys\FrameworkBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
+     * @param \Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExportScheduler $productSearchExportScheduler
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -177,7 +185,8 @@ class ProductFacade
         ProductCategoryDomainFactoryInterface $productCategoryDomainFactory,
         ProductParameterValueFactoryInterface $productParameterValueFactory,
         ProductVisibilityFactoryInterface $productVisibilityFactory,
-        ProductPriceCalculation $productPriceCalculation
+        ProductPriceCalculation $productPriceCalculation,
+        ProductSearchExportScheduler $productSearchExportScheduler
     ) {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -201,6 +210,7 @@ class ProductFacade
         $this->productParameterValueFactory = $productParameterValueFactory;
         $this->productVisibilityFactory = $productVisibilityFactory;
         $this->productPriceCalculation = $productPriceCalculation;
+        $this->productSearchExportScheduler = $productSearchExportScheduler;
     }
 
     /**
@@ -253,6 +263,7 @@ class ProductFacade
         $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
+        $this->scheduleProductOrMainVariantForImmediateExport($product->getId(), $product);
     }
 
     /**
@@ -288,6 +299,8 @@ class ProductFacade
         $this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 
+        $this->scheduleProductOrMainVariantForImmediateExport($productId, $product);
+
         return $product;
     }
 
@@ -303,6 +316,7 @@ class ProductFacade
             $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
             $productForRecalculations->markForVisibilityRecalculation();
             $this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
+            $this->scheduleProductOrMainVariantForImmediateExport($productForRecalculations->getId(), $productForRecalculations);
         }
         $this->em->remove($product);
         $this->em->flush();
@@ -441,5 +455,31 @@ class ProductFacade
     public function getOneByCatnumExcludeMainVariants($productCatnum)
     {
         return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
+    }
+
+    /**
+     * @internal Will be removed in the next major release
+     */
+    protected function validateInjectedDependencies(): void
+    {
+        if (!$this->productSearchExportScheduler instanceof ProductSearchExportScheduler) {
+            throw new BadMethodCallException(sprintf('Method "%s::setProductSearchExportScheduler()" has to be called in "services.yml" definition.', __CLASS__));
+        }
+    }
+
+    /**
+     * @param int $productId Id of deleted product is null, so it needs to be passed separately
+     * @param \Shopsys\FrameworkBundle\Model\Product\Product $product
+     */
+    protected function scheduleProductOrMainVariantForImmediateExport(int $productId, Product $product): void
+    {
+        $productIdToExport = $productId;
+
+        if ($product->isVariant()) {
+            $productIdToExport = $product->getMainVariant()->getId();
+        }
+
+        $this->validateInjectedDependencies();
+        $this->productSearchExportScheduler->scheduleProductIdForImmediateExport($productIdToExport);
     }
 }
