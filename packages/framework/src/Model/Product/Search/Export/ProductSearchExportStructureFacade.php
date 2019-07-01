@@ -128,9 +128,9 @@ class ProductSearchExportStructureFacade
     {
         foreach ($this->domain->getAllIds() as $domainId) {
             $output->writeln(sprintf('Deleting index for domain with ID %s', $domainId));
-            $this->elasticsearchStructureManager->deleteNotUsedIndexes(
-                $this->elasticsearchStructureManager->getAliasName($domainId, ProductElasticsearchRepository::ELASTICSEARCH_INDEX),
-                $domainId
+            $this->elasticsearchStructureManager->deleteIndex(
+                $domainId,
+                ProductElasticsearchRepository::ELASTICSEARCH_INDEX
             );
         }
     }

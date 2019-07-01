@@ -160,7 +160,7 @@ class ElasticsearchStructureManager
         );
 
         $indexes = $this->client->indices();
-        $indexName = $this->getIndexName($domainId, $index);
+        $indexName = $this->getVersionedIndexName($domainId, $index);
         if ($indexes->exists(['index' => $indexName])) {
             $indexes->delete(['index' => $indexName]);
         }
