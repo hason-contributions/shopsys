@@ -75,6 +75,32 @@ There you can find links to upgrade notes for other versions too.
     - stop using the deprecated method `\Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation::getVatCoefficientByPercent()`, use `PriceCalculation::getVatAmountByPriceWithVat()` for VAT calculation instead
     - if you want to customize the VAT calculation (eg. revert it back to the previous implementation), extend the service `@Shopsys\FrameworkBundle\Model\Pricing\PriceCalculation` and override the method `getVatAmountByPriceWithVat()`
     - if you created new tests regarding the price calculation they might start failing after the upgrade - in such case, please see the new VAT calculation and change the tests expectations accordingly
+- use aliases of index and build version in index name for better usage when deploying
+    - use method `ElasticsearchStructureManager::getAliasName` instead of `ElasticsearchStructureManager::getIndexName` when calling a query to elasticSearch in order to always target the right index
+        - fix test `FilterQueryTest::createFilter`
+        ```diff
+        -   $elasticSearchIndexName = $elasticSearchStructureManager->getIndexName(1, self::ELASTICSEARCH_INDEX);
+        +   $elasticSearchIndexName = $elasticSearchStructureManager->getAliasName(1, self::ELASTICSEARCH_INDEX);
+        ```
+    - run `php phing product-search-recreate-structure` to generate new indexes with aliases
+    - delete your old indexes in elasticsearch
+    - fix test `ProductSearchExportRepositoryTest::getExpectedStructureForRepository`
+        ```diff
+        -   shortDescription
+        +   short_description
+        ```
+    - use method `ElasticsearchStructureManager::deleteIndex` instead of `ElasticsearchStructureManager::deleteNotUsedIndexes` as it was deprecated
+    - if you have extended `ElasticsearchStructureManager` in `services.yml` you'll need call `setBuildVersion` and to send build version to it
+        ```diff
+          Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureManager:
+              arguments:
+                  - '%shopsys.elasticsearch.structure_dir%'
+                  - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+        +     calls:
+        +         - method: setBuildVersion
+        +           arguments:
+        +               - '%build-version%'
+        ```
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
@@ -154,6 +180,8 @@ There you can find links to upgrade notes for other versions too.
                         type: "null"
         +               excluded_404s: false
         ```
+- remove the useless route `front_category_panel` from your `routing_front.yml` ([#1042](https://github.com/shopsys/shopsys/pull/1042))
+    - you'll find the configuration file in `src/Shopsys/ShopBundle/Resources/config/`
 
 ### Tools
 - use the `build.xml` [Phing configuration](/docs/introduction/console-commands-for-application-management-phing-targets.md) from the `shopsys/framework` package ([#1068](https://github.com/shopsys/shopsys/pull/1068))

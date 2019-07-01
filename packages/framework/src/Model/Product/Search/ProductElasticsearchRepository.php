@@ -138,7 +138,7 @@ class ProductElasticsearchRepository
             return [];
         }
 
-        $parameters = $this->createQuery($this->getIndexName($domainId), $searchText);
+        $parameters = $this->createQuery($this->elasticsearchStructureManager->getAliasName($domainId, self::ELASTICSEARCH_INDEX), $searchText);
         $result = $this->client->search($parameters);
         return $this->extractIds($result);
     }
@@ -220,7 +220,7 @@ class ProductElasticsearchRepository
     public function bulkUpdate(int $domainId, array $data): void
     {
         $body = $this->productElasticsearchConverter->convertBulk(
-            $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            $this->elasticsearchStructureManager->getCurrentIndexName($domainId),
             $data
         );
 
@@ -237,7 +237,7 @@ class ProductElasticsearchRepository
     public function deleteNotPresent(int $domainId, array $keepIds): void
     {
         $this->client->deleteByQuery([
-            'index' => $this->elasticsearchStructureManager->getIndexName($domainId, self::ELASTICSEARCH_INDEX),
+            'index' => $this->elasticsearchStructureManager->getCurrentIndexName($domainId),
             'type' => '_doc',
             'body' => [
                 'query' => [

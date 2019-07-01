@@ -991,6 +991,10 @@ services:
         arguments:
             - '%shopsys.elasticsearch.structure_dir%'
             - '%env(ELASTIC_SEARCH_INDEX_PREFIX)%'
+        calls:
+            - method: setBuildVersion
+              arguments:
+                  - '%build-version%'
 
     Shopsys\FrameworkBundle\Model\Product\Search\Export\ProductSearchExporter:
         calls:
@@ -1000,6 +1004,8 @@ services:
 
     Shopsys\FrameworkBundle\Model\Product\Search\ProductElasticsearchConverter: ~
 
+    Shopsys\FrameworkBundle\Component\Elasticsearch\ElasticsearchStructureUpdateChecker: ~
+
     Shopsys\FrameworkBundle\Command\CheckRedisCommand:
         arguments:
             $cacheClients:
@@ -1008,3 +1014,5 @@ services:
             - '@snc_redis.doctrine_query'
             - '@snc_redis.framework_annotations'
             - '@snc_redis.session'
+
+    Shopsys\FrameworkBundle\Component\ArrayUtils\RecursiveArraySorter: ~
