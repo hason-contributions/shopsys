@@ -59,7 +59,11 @@ class ListedProductView
     protected $action;
 
     /**
-     * ListedProductView constructor.
+     * @var string
+     */
+    protected $vatName;
+
+    /**
      * @param int $id
      * @param string $name
      * @param string|null $shortDescription
@@ -68,6 +72,7 @@ class ListedProductView
      * @param int[] $flagIds
      * @param \Shopsys\ReadModelBundle\Product\Action\ProductActionView $action
      * @param \Shopsys\ReadModelBundle\Image\ImageView|null $image
+     * @param string $vatName
      */
     public function __construct(
         int $id,
@@ -77,7 +82,8 @@ class ListedProductView
         ProductPrice $sellingPrice,
         array $flagIds,
         ProductActionView $action,
-        ?ImageView $image
+        ?ImageView $image,
+        string $vatName
     ) {
         Assert::allInteger($flagIds);
 
@@ -89,6 +95,7 @@ class ListedProductView
         $this->shortDescription = $shortDescription;
         $this->flagIds = $flagIds;
         $this->action = $action;
+        $this->vatName = $vatName;
     }
 
     /**
@@ -153,5 +160,13 @@ class ListedProductView
     public function getAction(): ProductActionView
     {
         return $this->action;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVatName(): string
+    {
+        return $this->vatName;
     }
 }

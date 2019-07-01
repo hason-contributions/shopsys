@@ -57,7 +57,8 @@ class ListedProductViewFactory
             $this->productCachedAttributesFacade->getProductSellingPrice($product),
             $this->getFlagIdsForProduct($product),
             $productActionView,
-            $imageView
+            $imageView,
+            $product->getVat()->getName()
         );
     }
 
@@ -78,7 +79,8 @@ class ListedProductViewFactory
             $this->getProductPriceFromArrayByPricingGroup($productArray['prices'], $pricingGroup),
             $productArray['flags'],
             $productActionView,
-            $imageView
+            $imageView,
+            $productArray['vat_name']
         );
     }
 

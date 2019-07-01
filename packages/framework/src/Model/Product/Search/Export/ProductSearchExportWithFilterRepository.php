@@ -136,6 +136,7 @@ class ProductSearchExportWithFilterRepository extends ProductSearchExportReposit
             'main_variant' => $product->isMainVariant(),
             'detail_url' => $detailUrl,
             'visibility' => $visibility,
+            'vat_name' => $product->getVat()->getName(),
         ];
     }
 
