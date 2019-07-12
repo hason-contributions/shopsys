@@ -25,7 +25,7 @@ When you install new project, domains are set like this
 * `shopsys` on the URL `http://127.0.0.1:8000`
 * `2.shopsys` on the URL `http://127.0.0.2:8000`
 
-Please read [how to change domain settings](/docs/introduction/how-to-set-up-domains-and-locales.md#settings-and-working-with-domains) if you have project with only [one domain](/docs/introduction/how-to-set-up-domains-and-locales.md#1-how-to-create-a-single-domain-application) or [more domains](/docs/introduction/how-to-set-up-domains-and-locales.md#2-how-to-add-a-new-domain).
+Read [settings and working with domain](/docs/introduction/how-to-set-up-domains-and-locales.md#settings-and-working-with-domains) to learn how to set your domains correctly. If you have project with only one domain, read [how to create a single domain application](/docs/introduction/how-to-set-up-domains-and-locales.md#1-how-to-create-a-single-domain-application). If you have project with more than two domains, read [how to add a new domain](/docs/introduction/how-to-set-up-domains-and-locales.md#2-how-to-add-a-new-domain).
 Make sure you change the [url settings](/docs/introduction/how-to-set-up-domains-and-locales.md#4-change-the-url-address-for-an-existing-domain) at least in the production environment.
 
 *Note: When you change the domain settings, it is likely that [tests](/docs/introduction/automated-testing.md) (mainly [acceptance](/docs/introduction/automated-testing.md#acceptance-tests-aka-functional-tests-or-selenium-tests)) will fail and that [demo data](/docs/introduction/basic-and-demo-data-during-application-installation.md) won't fit you.
