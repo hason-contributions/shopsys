@@ -85,7 +85,7 @@ You can change default currencies in administration `Pricing > Currencies`, but 
 You can adjust the demo data to match your project.
 This takes a bit more effort but once you adjust demo data, the change will be applied every time application is rebuilded.
 
-#### Set administration default currency
+#### How to set administration default currency
 Class `SettingValueDataFixture`, method `load()`
 ```diff
 + $eurCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
