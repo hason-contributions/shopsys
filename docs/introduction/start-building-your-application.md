@@ -35,7 +35,7 @@ It is up to you to adjust them accordingly for your needs.*
 
 A locale is a combination of language and national settings like a collation of language-specific characters.
 We use [ISO 639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) to specify locale *(eg. `cs`, `de`, `en`, `sk`)*.
-Every domain has defined one locale and also administration has defined it's locale.
+Every domain has defined one locale and also administration has defined its locale.
 
 When you install the project, locales are
 * `shopsys` *(1st domain)*: `en`
