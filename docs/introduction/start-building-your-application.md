@@ -48,7 +48,7 @@ In case you want to change domain locale read [locale settings](/docs/introducti
 
 We use Elasticsearch on the frontend for product searching, filtering and for fast listing of products to provide better performance.
 
-*Please find more in [detailed article](/docs/model/elasticsearch.md) about Elasticsearch usage.*
+*Note: Find more in detailed article about [Elasticsearch](/docs/model/elasticsearch.md) usage.*
 
 Every domain have defined one [index](/docs/model/elasticsearch.md#elasticsearch-index-setting), you can find and adjust the index structure in files `src/Shopsys/ShopBundle/Resources/definition/<domain_id>.json`.
 The most often change is adding [fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) and changing [analysis](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html) to justify search behavior.
