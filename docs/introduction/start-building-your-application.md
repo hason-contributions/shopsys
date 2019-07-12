@@ -19,7 +19,7 @@ git commit -m'locked composer, npm and migrations'
 A domain can be understood as one instance of the shop.
 For example, just furniture can be bough on the domain shopsys-furniture.com while only electronics can be found on the domain shopsys-electro.com.
 
-*Please find more in an article that explains the [domain concept fully](/docs/introduction/domain-multidomain-multilanguage.md#domain).*
+*Note: Learn more about domain concept fully in [Domain, Multidomain, Multilanguage](/docs/introduction/domain-multidomain-multilanguage.md#domain) article.*
 
 When you install the project, domains are
 * `shopsys` on the URL `http://127.0.0.1:8000`
