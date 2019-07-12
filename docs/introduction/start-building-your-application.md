@@ -78,7 +78,7 @@ When you install new project, default currencies are set like this
 * `2.shopsys` *(2nd domain)*: `EUR`
 * administration: `CZK`
 
-You can change default currencies in administration `Pricing > Currencies`, but this change won't last after application rebuild (operation that you do often during development).
+You can change default currencies in administration `Pricing > Currencies`, but this change will not last after application rebuild (operation that you do often during development).
 
 ### Adjust demo data
 
