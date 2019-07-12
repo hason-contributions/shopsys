@@ -21,7 +21,7 @@ For example, just furniture can be bough on the domain shopsys-furniture.com whi
 
 *Note: Learn more about domain concept fully in [Domain, Multidomain, Multilanguage](/docs/introduction/domain-multidomain-multilanguage.md#domain) article.*
 
-When you install the project, domains are
+When you install new project, domains are set like this
 * `shopsys` on the URL `http://127.0.0.1:8000`
 * `2.shopsys` on the URL `http://127.0.0.2:8000`
 
