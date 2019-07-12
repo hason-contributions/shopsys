@@ -46,7 +46,7 @@ In case you want to change domain locale read [locale settings](/docs/introducti
 
 ## Where is Elasticsearch used and how to set it up
 
-We use Elasticsearch on the frontend for product searching, filtering and for fast listing of products and it provides great performance.
+We use Elasticsearch on the frontend for product searching, filtering and for fast listing of products to provide better performance.
 
 *Please find more in [detailed article](/docs/model/elasticsearch.md) about Elasticsearch usage.*
 
