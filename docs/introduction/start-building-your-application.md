@@ -71,7 +71,7 @@ The default currency is different for administration and for each of domains and
 The administration default currency is used in twig templates eg. as `{{ value|priceWithCurrencyAdmin }}`.
 The default currency for domain is used eg. as `{{ cartItemDiscount.priceWithVat|price }}`.
 
-*Please read more in a dedicated article about [price filters](/docs/model/how-to-work-with-money.md#price) and [administration price filter](/docs/model/how-to-work-with-money.md#pricewithcurrencyadmin).*
+*Note: Read more in a dedicated article about [price filters](/docs/model/how-to-work-with-money.md#price) and [administration price filter](/docs/model/how-to-work-with-money.md#pricewithcurrencyadmin).*
 
 When you install the project, default currencies are
 * `shopsys` *(1st domain)*: `CZK`
