@@ -80,7 +80,7 @@ When you install new project, default currencies are set like this
 
 You can change default currencies in administration `Pricing > Currencies`, but this change will not last after application rebuild (operation that you do often during development).
 
-### Adjust demo data
+### How to set default currency permanently
 
 You can adjust the demo data to match your project.
 This takes a bit more effort but once you adjust demo data, the change will be applied every time application is rebuilded.
