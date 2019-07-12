@@ -61,7 +61,7 @@ Routing is a mechanism that maps URL path to controllers and methods.
 
 *We use Symfony routing, so please find more in the [official documentation](https://symfony.com/doc/3.4/routing.html)*
 
-You can adjust the routing in configuration `src/Shopsys/ShopBundle/Resources/config/routing_front.yml` and [locale-specific](/docs/introduction/how-to-set-up-domains-and-locales.md#32-frontend-routes) in configuration `src/Shopsys/ShopBundle/Resources/config/routing_front_xx.yml`.
+You can adjust the routing in `src/Shopsys/ShopBundle/Resources/config/routing_front.yml` file and [locale specific](/docs/introduction/how-to-set-up-domains-and-locales.md#32-frontend-routes) in `src/Shopsys/ShopBundle/Resources/config/routing_front_xx.yml` files.
 
 ## What is a default currency and how to set it up
 
