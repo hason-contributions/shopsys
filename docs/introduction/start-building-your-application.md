@@ -83,7 +83,7 @@ You can change default currencies in administration `Pricing > Currencies`, but 
 ### Adjust demo data
 
 You can adjust the demo data to match your project.
-This takes a bit more effort but once you adjust demo data, the change will be applied after application rebuild.
+This takes a bit more effort but once you adjust demo data, the change will be applied every time application is rebuilded.
 
 #### Set administration default currency
 Class `SettingValueDataFixture`, method `load()`
