@@ -29,7 +29,7 @@ Read [settings and working with domain](/docs/introduction/how-to-set-up-domains
 Make sure you change the [url settings](/docs/introduction/how-to-set-up-domains-and-locales.md#4-change-the-url-address-for-an-existing-domain) at least in the production environment.
 
 *Note: When you change the domain settings, it is likely that [tests](/docs/introduction/automated-testing.md) (mainly [acceptance](/docs/introduction/automated-testing.md#acceptance-tests-aka-functional-tests-or-selenium-tests)) will fail and that [demo data](/docs/introduction/basic-and-demo-data-during-application-installation.md) will not fit you.
-It's up to you to adjust them according to your needs.*
+It is up to you to adjust them accordingly for your needs.*
 
 ## What is a locale and how to set up locales
 
