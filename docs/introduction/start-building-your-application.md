@@ -73,7 +73,7 @@ The default currency for domain is used eg. as `{{ cartItemDiscount.priceWithVat
 
 *Note: Read more in a dedicated article about [price filters](/docs/model/how-to-work-with-money.md#price) and [administration price filter](/docs/model/how-to-work-with-money.md#pricewithcurrencyadmin).*
 
-When you install the project, default currencies are
+When you install new project, default currencies are set like this
 * `shopsys` *(1st domain)*: `CZK`
 * `2.shopsys` *(2nd domain)*: `EUR`
 * administration: `CZK`
