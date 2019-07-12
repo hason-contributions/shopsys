@@ -99,7 +99,7 @@ Class `SettingValueDataFixture`, method `load()`
 + $this->setting->setForDomain(PricingSetting::DEFAULT_DOMAIN_CURRENCY, $eurCurrency->getId(), Domain::FIRST_DOMAIN_ID);
 ```
 
-#### Set next domains default currency
+#### How to set next domains default currency
 Class `MultidomainSettingValueDataFixture`, method `load()`
 ```diff
 - $defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
