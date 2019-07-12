@@ -66,7 +66,7 @@ You can adjust the routing in `src/Shopsys/ShopBundle/Resources/config/routing_f
 ## What is a default currency and how to set it up
 
 A default currency is a currency that is displayed when showing a price and no currency is specified explicitly.
-The default currency is different for administration and for each of domains and you can adjust the default currency in each place individually.
+The default currency is different for administration and for each of domains and you can adjust the default currency for each one individually.
 
 The administration default currency is used in twig templates eg. as `{{ value|priceWithCurrencyAdmin }}`.
 The default currency for domain is used eg. as `{{ cartItemDiscount.priceWithVat|price }}`.
