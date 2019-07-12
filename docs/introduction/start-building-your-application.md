@@ -42,7 +42,7 @@ When you install new project, locales are set like this
 * `2.shopsys` *(2nd domain)*: `cs`
 * administration: `en`
 
-Please read [how to change locale settings](/docs/introduction/how-to-set-up-domains-and-locales.md#3-locale-settings) if you need to change the locale setting of a domain or specifically [administration locale](/docs/introduction/how-to-set-up-domains-and-locales.md#36-locale-in-administration).
+In case you want to change domain locale read [locale settings](/docs/introduction/how-to-set-up-domains-and-locales.md#3-locale-settings) or in case you want to change default administration locale read [locale in administration](/docs/introduction/how-to-set-up-domains-and-locales.md#36-locale-in-administration).
 
 ## Where is Elasticsearch used and how to set it up
 
