@@ -53,8 +53,6 @@ We use Elasticsearch on the frontend for product searching, filtering and for fa
 Every domain has defined one [Elasticsearch index](/docs/model/elasticsearch.md#elasticsearch-index-setting). Definition of this index can be found in `src/Shopsys/ShopBundle/Resources/definition/<domain_id>.json` files.
 The most often change is adding [fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) and changing [analysis](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html) to justify search behavior.
 
-Data are not immediately available in Elasticsearch after import or change, they have to be [exported](/docs/introduction/console-commands-for-application-management-phing-targets.md#product-search-export-products) first.
-
 ## How to set up routing
 
 Routing is a mechanism that maps URL path to controllers and methods.
