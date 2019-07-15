@@ -56,6 +56,7 @@ final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysRele
      */
     public function work(Version $version): void
     {
+        $this->processRunner->run('git checkout ' . $this->createBranchName($version));
         $changelogFilePath = getcwd() . '/CHANGELOG.md';
         $smartFileInfo = new SmartFileInfo($changelogFilePath);
         $fileContent = $smartFileInfo->getContents();
@@ -82,6 +83,7 @@ final class CheckChangelogForTodaysDateReleaseWorker extends AbstractShopsysRele
             ));
 
             $this->commit('CHANGELOG.md date updated to today');
+            $this->processRunner->run('git push');
         }
         $this->symfonyStyle->success(Message::SUCCESS);
     }
